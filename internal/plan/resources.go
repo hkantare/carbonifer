@@ -481,5 +481,8 @@ func parseProvider(tfProviderName string) (providers.Provider, error) {
 	if strings.HasSuffix(tfProviderName, "aws") {
 		return providers.ParseProvider("aws")
 	}
+	if strings.HasSuffix(tfProviderName, "ibm") {
+		return providers.ParseProvider("ibm")
+	}
 	return providers.ParseProvider(tfProviderName)
 }

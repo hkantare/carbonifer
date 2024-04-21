@@ -31,6 +31,8 @@ func RegionEmission(provider providers.Provider, region string) (*Emissions, err
 		dataFile = "aws_co2_region.csv"
 	case providers.GCP:
 		dataFile = "gcp_co2_region.csv"
+	case providers.IBM:
+		dataFile = "ibm_co2_region.csv"
 	default:
 		return nil, errors.New("Provider not supported")
 	}
