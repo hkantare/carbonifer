@@ -19,16 +19,19 @@ const (
 	AZURE
 	// GCP is a Provider of type GCP.
 	GCP
+	// IBM is a Provider of type IBM Cloud.
+	IBM
 )
 
 var ErrInvalidProvider = errors.New("not a valid Provider")
 
-const _ProviderName = "AWSAZUREGCP"
+const _ProviderName = "AWSAZUREGCPIBM"
 
 var _ProviderMap = map[Provider]string{
 	AWS:   _ProviderName[0:3],
 	AZURE: _ProviderName[3:8],
 	GCP:   _ProviderName[8:11],
+	IBM: _ProviderName[11:14],
 }
 
 // String implements the Stringer interface.
@@ -46,6 +49,8 @@ var _ProviderValue = map[string]Provider{
 	strings.ToLower(_ProviderName[3:8]):  AZURE,
 	_ProviderName[8:11]:                  GCP,
 	strings.ToLower(_ProviderName[8:11]): GCP,
+	_ProviderName[11:14]:                  IBM,
+	strings.ToLower(_ProviderName[11:14]): IBM,
 }
 
 // ParseProvider attempts to convert a string to a Provider.

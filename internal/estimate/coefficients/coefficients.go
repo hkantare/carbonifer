@@ -26,6 +26,7 @@ type CoefficientsProviders struct {
 	AWS   Coefficients `json:"AWS"`
 	GCP   Coefficients `json:"GCP"`
 	Azure Coefficients `json:"Azure"`
+	IBM   Coefficients `json:"IBM"`
 }
 
 var coefficientsPerProviders *CoefficientsProviders

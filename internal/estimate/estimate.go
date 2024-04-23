@@ -83,6 +83,8 @@ func EstimateResource(resource resources.Resource) (*estimation.EstimationResour
 		return estimate.EstimateSupportedResource(resource), nil
 	case providers.GCP:
 		return estimate.EstimateSupportedResource(resource), nil
+	case providers.IBM:
+		return estimate.EstimateSupportedResource(resource), nil
 	default:
 		return nil, &providers.UnsupportedProviderError{Provider: resource.GetIdentification().Provider.String()}
 	}
