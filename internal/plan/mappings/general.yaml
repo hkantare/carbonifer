@@ -1,0 +1,15 @@
+general:
+  aws:
+    disk_types:
+      default: ssd
+      types:
+        standard: hdd
+    json_data:
+      ibm_instances : "ibm_instances.json"
+    ignored_resources: 
+      - "ibm_is_vpc"
+      - "ibm_is_subnet"
+      - "ibm_is_ssh_key"
+      - "ibm_is_virtual_network_interface"
+
+   
