@@ -1,0 +1,99 @@
+compute_resource:
+  ibmcloud_is_instance:
+    paths:
+      - cbf::all_select("type"; "ibm_is_instance")
+    type: resource
+    variables:
+      properties:
+        zone:
+          - paths:
+            - '.values.zone'
+        instance_profile:
+          - paths:
+            - '.values.instance_profile'
+            reference:
+              paths:
+                - cbf::all_select("type"; "ibm_is_instance_profile") | select(.values.name == "${key}")
+        image:
+          - paths:
+            - '.values.image'
+            reference:
+              paths:
+                - cbf::all_select("type"; "ibm_is_image") | select(.values.name == "${key}")
+        keys:
+          - paths:
+            - '.values.keys[]?.name'
+        primary_network_interface:
+          - paths:
+            - '.values.primary_network_interface[]'
+            properties:
+              subnet:
+                - paths:
+                  - '.subnet'
+                  reference:
+                    paths:
+                      - cbf::all_select("type"; "ibm_is_subnet") | select(.values.id == "${key}")
+              security_groups:
+                - paths:
+                  - '.security_groups[]?.id'
+                  reference:
+                    paths:
+                      - cbf::all_select("type"; "ibm_is_security_group") | select(.values.id == "${key}")
+        volumes:
+          - paths:
+            - '.values.volumes[]'
+            properties:
+              profile:
+                - paths:
+                  - '.profile'
+                  reference:
+                    paths:
+                      - cbf::all_select("type"; "ibm_is_volume_profile") | select(.values.name == "${key}")
+    properties:
+      name:
+        - paths: ".name"
+      address:
+        - paths: ".address"
+      type:
+        - paths: ".type"
+      vCPUs:
+        - paths:
+          - '"${instance_profile}"'
+          reference:
+            json_file: ibmcloud_instance_profiles
+            property: ".cpu"
+      memory:
+        - paths:
+          - '"${instance_profile}"'
+          unit: mb
+          reference:
+            json_file: ibmcloud_instance_profiles
+            property: ".memory"
+      zone:
+        - paths: ".values.zone"
+      region:
+        - paths: ".values.zone"
+          regex:
+            pattern: '^(.+)-\d+$'
+            group: 1
+      replication_factor:
+        - default: 1
+      storage:
+        - type: list
+          item:
+            - paths:
+              - '.values.volumes[]'
+              properties:
+                size:
+                  - paths: ".capacity"
+                    unit: gb
+                type:
+                  - paths: ".profile"
+                    reference:
+                      paths:
+                        - cbf::all_select("type"; "ibm_is_volume_profile") | select(.values.name == "${key}") | .values
+                      property: ".type"
+                key:
+                  - paths: ".name"
+                override_priority:
+                  - default: 0

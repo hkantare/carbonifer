@@ -3,6 +3,7 @@ package plan
 import (
 	"embed"
 	"io/fs"
+	"log"
 	"path/filepath"
 
 	"github.com/carboniferio/carbonifer/internal/providers"
@@ -43,6 +44,7 @@ func loadMappings() error {
 	for _, file := range files {
 		// Check if it's a directory
 		if file.IsDir() {
+			log.Println("--------file------", file.Name())
 			// Get the relative path
 			relativePath := filepath.Join(mappingsPath, file.Name())
 

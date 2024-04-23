@@ -1,4 +1,4 @@
-module github.com/carboniferio/carbonifer
+module github.com/hkantare/carbonifer
 
 go 1.20
 
@@ -27,6 +27,7 @@ require (
 require (
 	github.com/ProtonMail/go-crypto v0.0.0-20230528122434-6f98819771a1 // indirect
 	github.com/apparentlymart/go-textseg/v13 v13.0.0 // indirect
+	github.com/carboniferio/carbonifer v0.4.0 // indirect
 	github.com/cloudflare/circl v1.3.3 // indirect
 	github.com/google/s2a-go v0.1.4 // indirect
 	github.com/imdario/mergo v0.3.16 // indirect
