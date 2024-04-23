@@ -24,8 +24,8 @@ type InstanceStorage struct {
 
 var ibmInstanceTypes map[string]InstanceType
 
-// GetAWSInstanceType returns the information of an AWS instance type
-func GetAWSInstanceType(instanceTypeStr string) InstanceType {
+// GetIBMInstanceType returns the information of an AWS instance type
+func GetIBMInstanceType(instanceTypeStr string) InstanceType {
 	log.Debugf("  Getting info for IBM machine type: %v", instanceTypeStr)
 	if ibmInstanceTypes == nil {
 		byteValue := data.ReadDataFile("ibm_instances.json")

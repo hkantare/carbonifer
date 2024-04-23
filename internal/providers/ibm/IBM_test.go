@@ -33,7 +33,7 @@ func TestGetAWSInstanceType(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := GetAWSInstanceType(tt.args.instanceTypeStr); !reflect.DeepEqual(got, tt.want) {
+			if got := GetIBMInstanceType(tt.args.instanceTypeStr); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("GetAWSInstanceType() = %v, want %v", got, tt.want)
 			}
 		})
